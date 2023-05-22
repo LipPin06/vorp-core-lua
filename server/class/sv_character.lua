@@ -222,7 +222,9 @@ function Character(source, identifier, charIdentifier, group, job, jobgrade, fir
         end
 
         userData.removeCurrency = function(currency, quantity)
-            self.removeCurrency(currency, quantity)
+            if quantity > 0 then
+                self.removeCurrency(currency, quantity)
+            end
         end
 
         userData.addXp = function(xp)
@@ -276,12 +278,14 @@ function Character(source, identifier, charIdentifier, group, job, jobgrade, fir
     end
 
     self.removeCurrency = function(currency, quantity) --add check for security
-        if currency == 0 then
-            self.money = self.money - quantity
-        elseif currency == 1 then
-            self.gold = self.gold - quantity
-        elseif currency == 2 then
-            self.rol = self.rol - quantity
+        if quantity > 0 then
+            if currency == 0 then
+                self.money = self.money - quantity
+            elseif currency == 1 then
+                self.gold = self.gold - quantity
+            elseif currency == 2 then
+                self.rol = self.rol - quantity
+            end
         end
         self.updateCharUi()
     end
